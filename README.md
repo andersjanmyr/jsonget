@@ -13,6 +13,7 @@ $ go get github.com/andersjanmyr/jsonget
 ## Usage
 
 ```json
+// Example json
 {
   "name":"Wednesday",
   "age":6,
@@ -22,7 +23,8 @@ $ go get github.com/andersjanmyr/jsonget
     "blue": "#0000ff"
   },
   "parents":["Gomez","Morticia"],
-  "pets":[{"dog": "Fido"}, {"cat": "Misse"}] }`
+  "pets":[{"dog": "Fido"}, {"cat": "Misse"}]
+}
 ```
 
 
@@ -30,7 +32,7 @@ $ go get github.com/andersjanmyr/jsonget
 value, err := JsonGet(data, "name")
 // value = "Wednesday"
 
-	value, _ := JsonGet(data, "parents")
+value, _ := JsonGet(data, "parents")
 // value = []interface{}{"Gomez", "Morticia"}
 
 value, _ := JsonGet(data, "color")
