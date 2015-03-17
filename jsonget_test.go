@@ -55,6 +55,14 @@ func TestJsonGetNestedArray(t *testing.T) {
 	}
 }
 
+func TestJsonGetNestedArrayMap(t *testing.T) {
+	value, _ := JsonGet(data, "pets.1.cat")
+	expected := "Misse"
+	if value != expected {
+		t.Errorf("JsonGet() = %#v, expected: %#v", value, expected)
+	}
+}
+
 func TestJsonGetNestedArrayInvalidIndex(t *testing.T) {
 	value, err := JsonGet(data, "parents.3")
 	if err == nil {
