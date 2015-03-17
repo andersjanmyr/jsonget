@@ -28,7 +28,7 @@ $ go get github.com/andersjanmyr/jsonget
 ```
 
 
-```golang
+```go
 value, err := JsonGet(data, "name")
 // value = "Wednesday"
 
