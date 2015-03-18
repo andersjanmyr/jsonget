@@ -23,7 +23,7 @@ $ go get github.com/andersjanmyr/jsonget
     "blue": "#0000ff"
   },
   "parents":["Gomez","Morticia"],
-  "pets":[{"dog": "Fido"}, {"cat": "Misse"}]
+  "pets":[{"name": "Fido"}, {"name": "Misse"}]
 }
 ```
 
@@ -44,6 +44,9 @@ value, _ := JsonGet(data, "color.red")
 value, _ := JsonGet(data, "parents.1")
 // value = "Morticia"
 
-value, _ := JsonGet(data, "pets.1.cat")
+value, _ := JsonGet(data, "pets.1.name")
 // value := "Misse"
+
+value, _ := JsonGet(data, "pets.*.name")
+// value = []interface{}{"Fido", "Misse"}
 ```

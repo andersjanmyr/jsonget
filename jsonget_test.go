@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-const data = `{"name":"Wednesday", "age":6, "color": { "red": "#ff0000", "green": "#00ff00", "blue": "#0000ff" }, "parents":["Gomez","Morticia"], "pets":[{"dog": "Fido"}, {"cat": "Misse"}] }`
+const data = `{"name":"Wednesday", "age":6, "color": { "red": "#ff0000", "green": "#00ff00", "blue": "#0000ff" }, "parents":["Gomez","Morticia"], "pets":[{"name": "Fido"}, {"name": "Misse"}] }`
 
 func TestJsonGetString(t *testing.T) {
 	value, _ := JsonGet(data, "name")
@@ -56,9 +56,17 @@ func TestJsonGetNestedArray(t *testing.T) {
 }
 
 func TestJsonGetNestedArrayMap(t *testing.T) {
-	value, _ := JsonGet(data, "pets.1.cat")
+	value, _ := JsonGet(data, "pets.1.name")
 	expected := "Misse"
 	if value != expected {
+		t.Errorf("JsonGet() = %#v, expected: %#v", value, expected)
+	}
+}
+
+func TestJsonGetNestedArrayMapStar(t *testing.T) {
+	value, _ := JsonGet(data, "pets.*.name")
+	expected := []interface{}{"Fido", "Misse"}
+	if !reflect.DeepEqual(value, expected) {
 		t.Errorf("JsonGet() = %#v, expected: %#v", value, expected)
 	}
 }

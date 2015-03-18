@@ -34,12 +34,19 @@ func getValue(value interface{}, props []string) (val interface{}, err error) {
 		v := value.(map[string]interface{})[first]
 		return getValue(v, rest)
 	case []interface{}:
+		values := value.([]interface{})
+		if first == "*" {
+			vs := make([]interface{}, len(values))
+			for i, v := range values {
+				vs[i], _ = getValue(v, rest)
+			}
+			return vs, nil
+		}
 		i, err := strconv.ParseInt(first, 10, 0)
 		if err != nil {
 			return nil, err
 		}
-		v := value.([]interface{})[i]
-		return getValue(v, rest)
+		return getValue(values[i], rest)
 	default:
 		err := fmt.Errorf("Unsupported type: %v, for value: %#v", vv, value)
 		return value, err
